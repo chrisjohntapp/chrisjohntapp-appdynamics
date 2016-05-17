@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# Init script for AppDynamics Machine Agent
+#
+# description: machine agent for AppDynamics
+
+agent_base=<%= @agent_base %>
+
+# Insist we're run as root.
+if [ $UID -ne "0" ] ; then
+  echo "You must be root to run this script. Try sudo /etc/init.d/appd-machineagent (start|stop|kill9|status) instead."
+  exit 1
+fi
+
+case "$1" in
+
+  'start')
+    /usr/bin/nohup /usr/bin/java -jar ${agent_base}/MachineAgent/machineagent.jar > /var/log/appdynamics_machine_agent_startup.log 2>&1 & ;;
+
+  'stop')
+    PS=$(pgrep -f machineagent) && kill $PS ;;
+
+  'kill9')
+    PS=$(pgrep -f machineagent) && kill -9 $PS ;;
+
+  'status')
+    PS=$(ps -ef | grep machineagent.jar | grep -v grep)
+     if [ -n "$PS" ] ; then
+       echo Looks a likely candidate:
+       echo "Process: $PS"
+     else
+       echo 'Cannot see a likely-looking process'
+     fi ;;
+
+  *)
+    echo "Usage: $0 { start | stop | kill9 | status }"
+    exit 2 ;;
+
+esac
+
+exit 0
