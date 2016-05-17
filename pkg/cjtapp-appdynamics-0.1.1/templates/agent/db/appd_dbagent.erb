@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# Init script for AppDynamics Database Agent
+#
+# description: database agent for AppDynamics
+
+AGENT_RUNTIME_DIR="<%= @agent_runtime_directory %>"
+AGENT="${AGENT_RUNTIME_DIR}/db-agent.jar"
+AGENT_OPTIONS='<%= @agent_options %>'
+
+start()
+{
+nohup /usr/bin/java $AGENT_OPTIONS -jar $AGENT > /var/log/appdynamics_db_agent_startup.log 2>&1 &
+}
+
+stop()
+{
+ps -opid,cmd |egrep "[0-9]+ java.*db-agent" | awk '{print $1}' | xargs --no-run-if-empty kill -9
+}
+
+case "$1" in
+	start)
+	start ;;
+
+	stop)
+	stop ;;
+
+	restart)
+	stop &&	start ;;
+
+	*)
+	echo "Usage: $0 start|stop|restart"
+esac

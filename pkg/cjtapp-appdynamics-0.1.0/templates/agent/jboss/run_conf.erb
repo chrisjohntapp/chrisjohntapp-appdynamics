@@ -1,0 +1,26 @@
+#
+# Specify options to pass to the Java VM.
+#
+
+if [ "x$JAVA_OPTS" = "x" ]; then
+   JAVA_OPTS="-server -Xms128m -Xmx128m"
+fi
+
+JAVA_OPTS="-server -Xmx1g \
+    -javaagent:<%= @agent_runtime_directory %>/javaagent.jar \
+    -Djava.util.logging.config.file=<%= @application_home %>/conf/logging.properties \
+    -XX:+UseConcMarkSweepGC \
+    -Dsun.rmi.dgc.client.gcInterval=3600000 \
+    -Dsun.rmi.dgc.server.gcInterval=3600000 \
+    -Djboss.http.port=6700 \
+    -Djboss.jmxrmi.port=6702 \
+    -Djboss.webservice.port=6703 \
+    -Djboss.jndi.port=6704 \
+    -Djboss.jndirmi.port=6705 \
+    -Djboss.uil2.port=6706 \
+    -Djboss.platform.mbeanserver \
+    -Djavax.management.builder.initial=org.jboss.system.server.jmx.MBeanServerBuilderImpl \
+    -DDatabaseIdGenerator.database=oracle"
+
+# Put util-logging.jar on System classpath so that custom Logging Handler/Formatter can be used.
+JBOSS_CLASSPATH=<%= @application_home %>/lib/util-logging.jar
