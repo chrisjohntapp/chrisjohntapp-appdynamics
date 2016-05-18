@@ -11,13 +11,9 @@
   "operatingsystem_support": [
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [ "14.04" ]
-    }
-  ],
-  "dependencies": [
-    { "name":"puppetlabs/stdlib","version_requirement":">= 3.6.0",
-      "name":"aco-tomcat","version_requirement":">= 1.2.1",
-      "name":"puppetlabs-apache","version_requirement":">= 1.6.0"
+      "operatingsystemrelease": [
+        "14.04"
+      ]
     }
   ],
   "requirements": [
@@ -28,5 +24,8 @@
   ],
   "tags": [
     "appdynamics"
+  ],
+  "dependencies": [
+    {"name":"puppetlabs-apache","version_requirement":">= 1.6.0"}
   ]
 }
