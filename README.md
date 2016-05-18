@@ -35,10 +35,8 @@ which defines zero or more agent_types.  Currently supported options are 'db',
 'jboss', 'machine', 'php', 'tomcat'.  More options will likely be added in
 future.  This array could be set in hiera or in an ENC.
 
-aco-tomcat and puppetlabs-apache are listed as dependencies, but these are only
-required if a tomcat or php agent, respectively, is required, and even then any
-other module providing suitable services (ie. 'tomcat6', 'tomcat7', and 'httpd')
-will suffice.
+aco-tomcat is listed as a dependency, but any tomcat module which provides suitable
+services (ie. currently 'tomcat6' and 'tomcat7') will suffice.
 
 ### Usage
 

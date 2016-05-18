@@ -1,6 +1,6 @@
 {
   "name": "chrisjohntapp-appdynamics",
-  "version": "0.2.1",
+  "version": "0.2.0",
   "author": "chrisjohntapp",
   "summary": "Module to manage AppDynamics agents from locally-built .deb packages",
   "license": "GPL-3.0",
@@ -16,8 +16,7 @@
   ],
   "dependencies": [
     { "name":"puppetlabs/stdlib","version_requirement":">= 3.6.0",
-      "name":"aco-tomcat","version_requirement":">= 1.2.1",
-      "name":"puppetlabs-apache","version_requirement":">= 1.6.0"
+      "name":"aco-tomcat","version_requirement":">= 1.2.1"
     }
   ],
   "requirements": [
