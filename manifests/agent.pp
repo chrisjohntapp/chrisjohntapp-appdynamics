@@ -228,6 +228,7 @@ class appdynamics::agent
     contain "appdynamics::agent::config::${agent_type}"
   }
 
+  # Manage service(s).
   $agent_types.each |$agent_type|
   {
     unless $agent_type == 'tomcat'

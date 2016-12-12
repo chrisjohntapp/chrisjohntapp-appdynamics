@@ -60,5 +60,6 @@ class appdynamics::agent::config::php
       command =>  "${agent_runtime_directory}/install.sh -u --ignore-permissions; cd; rm -rf ${agent_runtime_directory}",
       user    =>  'root',
       notify  =>  Service['httpd'],
+    }
   }
 }
