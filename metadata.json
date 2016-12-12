@@ -4,9 +4,9 @@
   "author": "chrisjohntapp",
   "summary": "Module to manage AppDynamics agents from locally-built .deb packages",
   "license": "GPL-3.0",
-  "source": "https://github.com/chrisjohntapp/puppet-appdynamics",
-  "project_page": "https://github.com/chrisjohntapp/puppet-appdynamics",
-  "issues_url": "https://github.com/chrisjohntapp/puppet-appdynamics/issues",
+  "source": "https://github.com/chrisjohntapp/chrisjohntapp-appdynamics",
+  "project_page": "https://github.com/chrisjohntapp/chrisjohntapp-appdynamics",
+  "issues_url": "https://github.com/chrisjohntapp/chrisjohntapp-appdynamics/issues",
   "description": "Module to manage AppDynamics agents from locally-built .deb packages",
   "operatingsystem_support": [
     {

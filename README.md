@@ -1,4 +1,4 @@
-# puppet-appdynamics
+# appdynamics
 
 ## Overview
 
