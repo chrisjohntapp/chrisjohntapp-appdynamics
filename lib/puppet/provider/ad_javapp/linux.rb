@@ -1,51 +1,47 @@
-Puppet::Type.type(:ad_javapp).provide(:linux) do
+require 'etc'
+require 'fileutils'
 
+Puppet::Type.type(:ad_javapp).provide(:linux) do
   desc "Creates a copy of the installed java application agent
     alongside it, based on an agent installed from a package.
     Also removes the copy when requried."
 
   has_feature :clone :delete
-
-  commands :cpr => "/usr/bin/cp -r"
-  commands :rmr => "/usr/bin/rm -rf"
-
   confine :kernel => :Linux
   default_for :kernel => :Linux
 
   def create
-    :cpr resource[:agent_source_dir] resource[:agent_target_dir]
+    FileUtils.mkdir(resource[:agent_target_dir])
+    FileUtils.cp_r("#{resource[:agent_source_dir]}/.", resource[:agent_target_dir])
   end
-
   def destroy
-    :rmr resource[:agent_target_dir]
+    FileUtils.rm_r(resource[:agent_target_dir])
   end
-
   def exists?
-    # Check if target dir exists.
+    File.directory?(resource[:agent_target_dir])
   end
 
   def group
-    # Return group owner of target directory.
+    gid = File.stat(resource[:agent_target_dir]).gid
+    Etc.getgrgid(gid).name
   end
-
   def group=(value)
-    # Chown -R :group target directory.
+    FileUtils.chown_R(nil, value, resource[:agent_target_dir])
   end
 
   def owner
-    # Return owner of target directory.
+    uid = File.stat(resource[:agent_target_dir]).uid
+    Etc.getpwuid(resource[uid]).name
   end
-
   def owner=(value)
-    # Chown -R owner: of target directory
+    FileUtils.chown_R(value, nil, resource[:agent_target_dir])
   end
 
   def mode
-    # Return current mode of target directory.
+    stat = File.stat(resource[:agent_target_dir])
+    stat.mode.to_s(8)[2..5]
   end
-
   def mode=(value)
-    # Chmod -R target directory.
+    FileUtils.chmod_R(value.to_i, resource[:agent_target_dir])
   end
-
 end
